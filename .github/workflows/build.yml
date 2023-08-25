@@ -1,12 +1,9 @@
 name: boot-framework-build
 on: [push]
-  # push:
-  #   branches:
-  #     - 'release/*'
-  #     - 'main'
 jobs:
-  maven_clean_publish:
-    name: Publish-Framework-Job
+  maven_clean_verify:
+    name: Build and Test Repo
+    if: github.ref_type == 'branch' && startsWith(github.ref_name, 'feature')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -19,5 +16,5 @@ jobs:
           check-latest: true
           cache: maven
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots --show-version package
+        run: mvn --batch-mode --update-snapshots --show-version verify
     timeout-minutes: 10
