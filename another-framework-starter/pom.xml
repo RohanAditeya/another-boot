@@ -11,7 +11,7 @@
         <relativePath>../</relativePath>
     </parent>
 
-    <artifactId>another-framework-starter</artifactId>
+    <artifactId>another-boot-starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
 </project>
