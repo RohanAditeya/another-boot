@@ -36,4 +36,12 @@
         <module>another-framework-starter</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/RohanAditeya/another-boot</url>
+        </repository>
+    </distributionManagement>
+
 </project>
