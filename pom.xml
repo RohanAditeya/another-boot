@@ -54,8 +54,9 @@
     </dependencyManagement>
 
     <modules>
-        <module>another-framework-starter</module>
+        <module>another-boot-starter</module>
         <module>another-boot-starter-parent</module>
+        <module>another-boot-starter-webflux</module>
     </modules>
 
     <distributionManagement>
