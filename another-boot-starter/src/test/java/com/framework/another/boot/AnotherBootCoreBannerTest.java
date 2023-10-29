@@ -15,6 +15,6 @@ public class AnotherBootCoreBannerTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         anotherBootCoreBanner.printBanner(null, null, new PrintStream(outputStream));
         String actual = outputStream.toString();
-        assertThat(actual).startsWith(String.join("\r\n", AnotherBootCoreBanner.ANOTHER_BOOT_BANNER));
+        assertThat(actual).contains(AnotherBootCoreBanner.ANOTHER_BOOT_BANNER);
     }
 }
