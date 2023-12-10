@@ -1,0 +1,7 @@
+# Application listeners
+org.springframework.context.ApplicationListener=\
+com.framework.another.boot.BannerInitializationListener
+
+# Environment post processor
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.framework.another.boot.AnotherBootCoreEnvironmentPostProcessor
