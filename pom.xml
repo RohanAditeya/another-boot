@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0</version>
+        <version>3.2.1</version>
     </parent>
 
     <groupId>com.framework.another.boot</groupId>
@@ -38,6 +38,7 @@
         <spring-cloud.version>2022.0.1</spring-cloud.version>
         <spring-statemachine.version>3.2.1</spring-statemachine.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+        <cucumber.version>7.15.0</cucumber.version>
     </properties>
 
     <dependencyManagement>
@@ -55,6 +56,24 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-java</artifactId>
+                <version>${cucumber.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-junit-platform-engine</artifactId>
+                <version>${cucumber.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-spring</artifactId>
+                <version>${cucumber.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -107,9 +126,6 @@
                             <goals>
                                 <goal>report</goal>
                             </goals>
-                            <configuration>
-                                <formats>HTML</formats>
-                            </configuration>
                         </execution>
                         <execution>
                             <id>default-report-integration</id>
@@ -130,7 +146,20 @@
                                             <limit>
                                                 <counter>INSTRUCTION</counter>
                                                 <value>COVEREDRATIO</value>
-                                                <minimum>0.8</minimum>
+                                                <minimum>0.80</minimum>
+                                            </limit>
+                                        </limits>
+                                    </rule>
+                                    <rule>
+                                        <element>CLASS</element>
+                                        <excludes>
+                                            <exclude>com.fantasy.football.web.api.FantasyFootballWebApplication</exclude>
+                                        </excludes>
+                                        <limits>
+                                            <limit>
+                                                <counter>CLASS</counter>
+                                                <value>MISSEDCOUNT</value>
+                                                <maximum>0</maximum>
                                             </limit>
                                         </limits>
                                     </rule>
