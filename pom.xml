@@ -152,9 +152,6 @@
                                     </rule>
                                     <rule>
                                         <element>CLASS</element>
-                                        <excludes>
-                                            <exclude>com.fantasy.football.web.api.FantasyFootballWebApplication</exclude>
-                                        </excludes>
                                         <limits>
                                             <limit>
                                                 <counter>CLASS</counter>
