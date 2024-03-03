@@ -7,12 +7,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.3</version>
     </parent>
 
     <groupId>com.framework.another.boot</groupId>
     <artifactId>another-framework</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>another-framework</name>
@@ -35,7 +35,7 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <spring-cloud.version>2022.0.1</spring-cloud.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
         <spring-statemachine.version>3.2.1</spring-statemachine.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
         <cucumber.version>7.15.0</cucumber.version>
@@ -79,6 +79,11 @@
     </dependencyManagement>
 
     <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -182,5 +187,12 @@
             <url>https://maven.pkg.github.com/RohanAditeya/another-framework</url>
         </repository>
     </distributionManagement>
+
+    <scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+        <url>https://github.com/RohanAditeya/another-framework.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
 </project>
