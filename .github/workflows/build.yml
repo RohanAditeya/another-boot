@@ -25,9 +25,15 @@ jobs:
         run: mvn --batch-mode --show-version deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Release with Maven
-        if: github.ref_type == 'branch' && (startsWith(github.ref_name, 'main'))
-        run: git config user.email "release-bot@example.com" && git config user.name "release-bot" && mvn --batch-mode release:prepare release:perform
+      - name: Release version
+        uses: qcastel/github-actions-maven-release@master
         env:
+          JAVA_HOME: /usr/lib/jvm/java-21-openjdk/
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          git-release-bot-name: "release-bot"
+          git-release-bot-email: "release-bot@example.com"
+          release-branch-name: "main"
+          version-patch: true
+          access-token: ${{ secrets.GITHUB_TOKEN }}
     timeout-minutes: 10
