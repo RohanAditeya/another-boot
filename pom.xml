@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.3</version>
+        <version>3.2.4</version>
     </parent>
 
     <groupId>com.framework.another.boot</groupId>
@@ -37,6 +37,7 @@
         <spring-statemachine.version>3.2.1</spring-statemachine.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
         <cucumber.version>7.15.0</cucumber.version>
+        <ecs-logging-java.version>1.6.0</ecs-logging-java.version>
     </properties>
 
     <dependencyManagement>
@@ -54,6 +55,11 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>co.elastic.logging</groupId>
+                <artifactId>logback-ecs-encoder</artifactId>
+                <version>${ecs-logging-java.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.cucumber</groupId>
@@ -183,6 +189,8 @@
         <module>another-boot-starter</module>
         <module>another-boot-starter-parent</module>
         <module>another-boot-starter-webflux</module>
+        <module>another-boot-security-core</module>
+        <module>another-boot-observability-starter</module>
     </modules>
 
     <distributionManagement>

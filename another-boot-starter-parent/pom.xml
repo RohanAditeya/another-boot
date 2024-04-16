@@ -27,6 +27,11 @@
                 <artifactId>another-boot-starter-webflux</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.framework.another.boot</groupId>
+                <artifactId>another-boot-observability-starter</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
