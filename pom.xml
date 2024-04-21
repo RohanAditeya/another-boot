@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>3.2.5</version>
     </parent>
 
     <groupId>com.framework.another.boot</groupId>
@@ -33,7 +33,7 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
         <spring-statemachine.version>3.2.1</spring-statemachine.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
         <cucumber.version>7.15.0</cucumber.version>
