@@ -29,30 +29,30 @@ jobs:
         with:
           package-name: 'com.framework.another.boot.another-framework'
           package-type: 'maven'
-          min-versions-to-keep: 2
+          min-versions-to-keep: 4
       - uses: actions/delete-package-versions@v5
         with:
           package-name: 'com.framework.another.boot.another-boot-observability-starter'
           package-type: 'maven'
-          min-versions-to-keep: 2
+          min-versions-to-keep: 4
       - uses: actions/delete-package-versions@v5
         with:
           package-name: 'com.framework.another.boot.another-boot-security-core'
           package-type: 'maven'
-          min-versions-to-keep: 2
+          min-versions-to-keep: 4
       - uses: actions/delete-package-versions@v5
         with:
           package-name: 'com.framework.another.boot.another-boot-starter'
           package-type: 'maven'
-          min-versions-to-keep: 2
+          min-versions-to-keep: 4
       - uses: actions/delete-package-versions@v5
         with:
           package-name: 'com.framework.another.boot.another-boot-starter-parent'
           package-type: 'maven'
-          min-versions-to-keep: 2
+          min-versions-to-keep: 4
       - uses: actions/delete-package-versions@v5
         with:
           package-name: 'com.framework.another.boot.another-boot-starter-webflux'
           package-type: 'maven'
-          min-versions-to-keep: 2
+          min-versions-to-keep: 4
     timeout-minutes: 10
