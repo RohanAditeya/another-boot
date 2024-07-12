@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
     </parent>
 
     <groupId>com.framework.another.boot</groupId>
@@ -40,6 +40,9 @@
         <ecs-logging-java.version>1.6.0</ecs-logging-java.version>
         <reflections.version>0.10.2</reflections.version>
         <vaadin.version>24.4.2</vaadin.version>
+        <hibernate-reactive.version>2.3.1.Final</hibernate-reactive.version>
+        <vertx-pg-client.version>4.5.8</vertx-pg-client.version>
+        <spring-modulith.version>1.2.1</spring-modulith.version>
     </properties>
 
     <dependencyManagement>
@@ -64,6 +67,23 @@
                 <version>${vaadin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.modulith</groupId>
+                <artifactId>spring-modulith-bom</artifactId>
+                <version>${spring-modulith.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.reactive</groupId>
+                <artifactId>hibernate-reactive-core</artifactId>
+                <version>${hibernate-reactive.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-pg-client</artifactId>
+                <version>${vertx-pg-client.version}</version>
             </dependency>
             <dependency>
                 <groupId>co.elastic.logging</groupId>
