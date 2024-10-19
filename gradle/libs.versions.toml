@@ -1,0 +1,7 @@
+[versions]
+spring_boot_gradle_plugin_version = "3.3.4"
+
+[libraries]
+
+[plugins]
+spring_boot_gradle_plugin = { id = "org.springframework.boot", version.ref = "spring_boot_gradle_plugin_version" }
