@@ -1,5 +1,5 @@
 [versions]
-spring_boot_gradle_plugin_version = "3.3.4"
+spring_boot_gradle_plugin_version = "3.3.5"
 
 [libraries]
 

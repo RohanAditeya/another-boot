@@ -1,7 +1,19 @@
-import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+plugins {
+    `java-platform`
+}
 
-the<DependencyManagementExtension>().apply {
-    dependencies {
-        dependency("${project.group}:another-boot-starter:${project.version}")
+dependencies {
+    constraints {
+        api(project(":another-boot-starter"))
+        api(project(":another-boot-observability-starter"))
+        api(project(":another-boot-starter-webflux"))
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven-parent-publish") {
+            from(components["javaPlatform"])
+        }
     }
 }
