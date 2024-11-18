@@ -1,6 +1,7 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
-val starterProjectName: String = "another-boot-starter-parent"
+val starterProjectName: List<String> = listOf("another-boot-starter-parent", "another-boot-gradle-plugin")
 
 plugins {
     `java-library`
@@ -26,7 +27,7 @@ allprojects {
         set("artifactory-password", "password")
     }
 
-    if (name != starterProjectName) {
+    if (!starterProjectName.contains(name)) {
 
         apply(plugin = "java-library")
         apply(plugin = "io.spring.dependency-management")
@@ -39,7 +40,7 @@ allprojects {
 
         the<DependencyManagementExtension>().apply {
             imports {
-                mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+                mavenBom(SpringBootPlugin.BOM_COORDINATES)
                 mavenBom("org.springframework.cloud:spring-cloud-dependencies:${project.ext.get("springCloudVersion")}")
             }
             dependencies {
