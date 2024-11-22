@@ -1,7 +1,7 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
-val starterProjectName: List<String> = listOf("another-boot-starter-parent", "another-boot-gradle-plugin")
+val starterProjectName: List<String> = listOf("another-boot-bom", "another-boot-gradle-plugin")
 
 plugins {
     `java-library`
@@ -25,6 +25,7 @@ allprojects {
 
     ext {
         set("artifactory-password", "password")
+        set("springCloudVersion", "2023.0.2")
     }
 
     if (!starterProjectName.contains(name)) {
@@ -33,14 +34,13 @@ allprojects {
         apply(plugin = "io.spring.dependency-management")
 
         ext {
-            set("springCloudVersion", "2023.0.2")
             set("logbackEcsEncoderVersion", "1.6.0")
             set("reflectionsVersion", "0.10.2")
         }
 
         the<DependencyManagementExtension>().apply {
             imports {
-                mavenBom(SpringBootPlugin.BOM_COORDINATES)
+                mavenBom(SpringBootPlugin.BOM_COORDINATES) // Applying the Spring boot BOM this way without the plugin since we do not need the plugin.
                 mavenBom("org.springframework.cloud:spring-cloud-dependencies:${project.ext.get("springCloudVersion")}")
             }
             dependencies {

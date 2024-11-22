@@ -5,19 +5,21 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+import org.springframework.boot.gradle.util.VersionExtractor
 
 class AnotherFrameworkGradlePlugin: Plugin<Project> {
 
-    private val anotherBootBOMCoordinates: String = "another-boot-starter-parent"
+    private val anotherBootVersion = VersionExtractor.forClass(AnotherFrameworkGradlePlugin::class.java)
+    private val anotherBootBOMCoordinates: String = "com.framework.another.boot:another-boot-bom:${anotherBootVersion}"
 
     override fun apply(target: Project) {
-        target.plugins.apply(SpringBootPlugin::class.java)
-        target.plugins.apply(DependencyManagementPlugin::class.java)
+        target.pluginManager.apply(SpringBootPlugin::class.java)
+        target.pluginManager.apply(DependencyManagementPlugin::class.java)
         target.extensions.apply {
             val dependencyManagementExtension = getByType(DependencyManagementExtension::class.java)
             dependencyManagementExtension.apply {
                 imports { importsHandler ->
-                    importsHandler.mavenBom("${target.group}:${anotherBootBOMCoordinates}:${target.version}")
+                    importsHandler.mavenBom(anotherBootBOMCoordinates)
                 }
             }
         }

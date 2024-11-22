@@ -1,3 +1,5 @@
+import java.util.jar.Attributes
+
 plugins {
     `java-gradle-plugin`
     kotlin("jvm") version "2.0.21"
@@ -19,14 +21,28 @@ dependencies {
 gradlePlugin {
     plugins {
         create("AnotherBootGradlePlugin") {
-            id = "com.anotherframework.boot"
+            id = "${project.group}"
             implementationClass = "com.anotherframework.gradle.plugin.AnotherFrameworkGradlePlugin"
         }
     }
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    withJavadocJar()
+    withSourcesJar()
+}
+
 kotlin {
     jvmToolchain(21)
+}
+
+tasks.jar {
+    manifest {
+        attributes(mapOf(Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version))
+    }
 }
 
 tasks.test {
