@@ -1,5 +1,6 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import java.util.jar.Attributes
 
 val starterProjectName: List<String> = listOf("another-boot-bom", "another-boot-gradle-plugin")
 
@@ -38,6 +39,7 @@ allprojects {
             set("reflectionsVersion", "0.10.2")
         }
 
+        // Adding required dependency management on all sub projects
         the<DependencyManagementExtension>().apply {
             imports {
                 mavenBom(SpringBootPlugin.BOM_COORDINATES) // Applying the Spring boot BOM this way without the plugin since we do not need the plugin.
@@ -49,14 +51,7 @@ allprojects {
             }
         }
 
-        java {
-            toolchain {
-                languageVersion = JavaLanguageVersion.of(21)
-            }
-            withJavadocJar()
-            withSourcesJar()
-        }
-
+        // Publishing config for sub libraries.
         publishing {
             publications {
                 create<MavenPublication>("maven-publish") {
@@ -74,6 +69,7 @@ allprojects {
         }
     }
 
+    // Publishing details for all projects
     publishing {
         repositories {
             maven {
@@ -89,8 +85,26 @@ allprojects {
             }
         }
     }
+
+    // Add manifest entries if java plugin is applied to a sub-project
+    pluginManager.withPlugin("java") {
+        java {
+            toolchain {
+                languageVersion = JavaLanguageVersion.of(21)
+            }
+            withJavadocJar()
+            withSourcesJar()
+        }
+
+        tasks.jar {
+            manifest {
+                attributes(mapOf(Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version))
+            }
+        }
+    }
 }
 
+// Add pom entries on the parent project alone.
 publishing {
     publications {
         getByName<MavenPublication>("maven-publish") {

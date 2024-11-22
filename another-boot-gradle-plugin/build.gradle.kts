@@ -39,12 +39,6 @@ kotlin {
     jvmToolchain(21)
 }
 
-tasks.jar {
-    manifest {
-        attributes(mapOf(Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version))
-    }
-}
-
 tasks.test {
     useJUnitPlatform()
 }
