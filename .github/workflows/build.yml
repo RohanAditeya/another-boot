@@ -9,17 +9,17 @@ jobs:
       packages: write
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up JDK 21
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'corretto'
+          distribution: 'liberica'
           check-latest: true
-          cache: maven
-      - name: Test with Maven
+          cache: gradle
+      - name: Test with Gradle
         if: github.ref_type == 'branch' && !(startsWith(github.ref_name, 'release') || startsWith(github.ref_name, 'main'))
-        run: mvn --batch-mode --update-snapshots --show-version verify
+        run: gradle -Partifactory-password=${{ secrets.GITHUB_TOKEN }} -Partifactory-user=${{ github.actor }} publish
       - name: Release with Maven
         if: github.ref_type == 'branch' && (startsWith(github.ref_name, 'main'))
         run: git config user.email "release-bot@example.com" && git config user.name "release-bot" && mvn --batch-mode release:clean release:prepare release:perform

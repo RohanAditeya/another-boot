@@ -26,6 +26,7 @@ allprojects {
 
     ext {
         set("artifactory-password", "password")
+        set("artifactory-user", "user")
         set("springCloudVersion", "2023.0.2")
     }
 
@@ -79,7 +80,7 @@ allprojects {
                     register(name = "basic-authentication", type = BasicAuthentication::class)
                 }
                 credentials {
-                    username = "RohanAditeya"
+                    username = project.ext.get("artifactory-user")!!.toString()
                     password = project.ext.get("artifactory-password")!!.toString()
                 }
             }
