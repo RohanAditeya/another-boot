@@ -17,14 +17,16 @@ jobs:
           distribution: 'liberica'
           check-latest: true
           cache: gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: current
       - name: Test with Gradle
         if: github.ref_type == 'branch' && !(startsWith(github.ref_name, 'release') || startsWith(github.ref_name, 'main'))
-        run: gradle -Partifactory-password=${{ secrets.GITHUB_TOKEN }} -Partifactory-user=${{ github.actor }} publish
-      - name: Release with Maven
+        run: gradle build
+      - name: Release with Gradle
         if: github.ref_type == 'branch' && (startsWith(github.ref_name, 'main'))
-        run: git config user.email "release-bot@example.com" && git config user.name "release-bot" && mvn --batch-mode release:clean release:prepare release:perform
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gradle -Partifactory-password=${{ secrets.GITHUB_TOKEN }} -Partifactory-user=${{ github.actor }} publish
       - uses: actions/delete-package-versions@v5
         with:
           package-name: 'com.framework.another.boot.another-framework'
