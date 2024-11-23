@@ -8,6 +8,7 @@ plugins {
     `java-library`
     `maven-publish`
     alias(libs.plugins.spring.boot.gradle.plugin) apply false
+    alias(libs.plugins.gradle.release.plugin) apply false
 }
 
 ext {
@@ -19,6 +20,7 @@ allprojects {
     version = "2.0.0-SNAPSHOT"
 
     apply(plugin = "maven-publish")
+    apply(plugin = "net.researchgate.release")
 
     repositories {
         mavenCentral()

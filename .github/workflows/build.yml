@@ -23,38 +23,8 @@ jobs:
           gradle-version: current
       - name: Test with Gradle
         if: github.ref_type == 'branch' && !(startsWith(github.ref_name, 'release') || startsWith(github.ref_name, 'main'))
-        run: gradle build
+        run: gradle -Prelease.useAutomaticVersion=true -Partifactory-password=${{ secrets.GITHUB_TOKEN }} -Partifactory-user=${{ github.actor }} release #gradle build
       - name: Release with Gradle
         if: github.ref_type == 'branch' && (startsWith(github.ref_name, 'main'))
-        run: gradle -Partifactory-password=${{ secrets.GITHUB_TOKEN }} -Partifactory-user=${{ github.actor }} publish
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: 'com.framework.another.boot.another-framework'
-          package-type: 'maven'
-          min-versions-to-keep: 4
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: 'com.framework.another.boot.another-boot-observability-starter'
-          package-type: 'maven'
-          min-versions-to-keep: 4
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: 'com.framework.another.boot.another-boot-security-core'
-          package-type: 'maven'
-          min-versions-to-keep: 4
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: 'com.framework.another.boot.another-boot-starter'
-          package-type: 'maven'
-          min-versions-to-keep: 4
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: 'com.framework.another.boot.another-boot-starter-parent'
-          package-type: 'maven'
-          min-versions-to-keep: 4
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: 'com.framework.another.boot.another-boot-starter-webflux'
-          package-type: 'maven'
-          min-versions-to-keep: 4
+        run: gradle -Prelease.useAutomaticVersion=true -Partifactory-password=${{ secrets.GITHUB_TOKEN }} -Partifactory-user=${{ github.actor }} release
     timeout-minutes: 10

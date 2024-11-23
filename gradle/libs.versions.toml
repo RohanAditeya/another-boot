@@ -3,6 +3,7 @@ spring_boot_gradle_plugin_version = "3.3.5"
 spring_dependency_management_plugin_version = "1.1.6"
 gradle_plugin_publish_version = "1.3.0"
 junit_bom_version = "5.11.3"
+gradle_release_plugin_version = "3.0.2"
 
 [libraries]
 springBootGradlePlugin = { group = "org.springframework.boot", name = "spring-boot-gradle-plugin", version.ref = "spring_boot_gradle_plugin_version" }
@@ -12,3 +13,4 @@ junitBom = { group = "org.junit", name = "junit-bom", version.ref = "junit_bom_v
 [plugins]
 spring_boot_gradle_plugin = { id = "org.springframework.boot", version.ref = "spring_boot_gradle_plugin_version" }
 gradle_publish_plugin = { id = "com.gradle.plugin-publish", version.ref = "gradle_plugin_publish_version" }
+gradle_release_plugin = { id = "net.researchgate.release", version.ref = "gradle_release_plugin_version" }
