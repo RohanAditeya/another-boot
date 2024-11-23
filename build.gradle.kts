@@ -144,6 +144,6 @@ release {
     }
 }
 
-tasks.updateVersion {
+tasks.afterReleaseBuild {
     dependsOn(tasks.publish)
 }
