@@ -20,7 +20,6 @@ allprojects {
     version = "2.0.0-SNAPSHOT"
 
     apply(plugin = "maven-publish")
-    apply(plugin = "net.researchgate.release")
 
     repositories {
         mavenCentral()
@@ -103,13 +102,6 @@ allprojects {
             }
         }
     }
-
-    // Release config
-    release {
-        git {
-            requireBranch.set("") // Testing with feature branch and will be removed afterward.
-        }
-    }
 }
 
 // Add pom entries on the parent project alone.
@@ -142,5 +134,12 @@ publishing {
                 }
             }
         }
+    }
+}
+
+// Release config
+release {
+    git {
+        requireBranch.set("") // Testing with feature branch and will be removed afterward.
     }
 }
