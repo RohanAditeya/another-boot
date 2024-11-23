@@ -8,7 +8,7 @@ plugins {
     `java-library`
     `maven-publish`
     alias(libs.plugins.spring.boot.gradle.plugin) apply false
-    alias(libs.plugins.gradle.release.plugin) apply false
+    alias(libs.plugins.gradle.release.plugin)
 }
 
 ext {
@@ -101,6 +101,12 @@ allprojects {
             manifest {
                 attributes(mapOf(Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version))
             }
+        }
+    }
+
+    release {
+        git {
+            requireBranch.set("") // Testing with feature branch and will be removed afterward.
         }
     }
 }
