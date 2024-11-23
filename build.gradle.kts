@@ -104,6 +104,7 @@ allprojects {
         }
     }
 
+    // Release config
     release {
         git {
             requireBranch.set("") // Testing with feature branch and will be removed afterward.
