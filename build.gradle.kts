@@ -143,3 +143,7 @@ release {
         requireBranch.set("") // Testing with feature branch and will be removed afterward.
     }
 }
+
+tasks.updateVersion {
+    dependsOn(tasks.publish)
+}
