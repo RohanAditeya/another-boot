@@ -15,7 +15,7 @@ ext {
     set("scmConnectionUrl", "https://github.com/RohanAditeya/another-framework.git")
 }
 
-allprojects {
+subprojects {
     group = "com.framework.another.boot"
     version = "2.0.0-SNAPSHOT"
 
@@ -102,48 +102,4 @@ allprojects {
             }
         }
     }
-}
-
-// Add pom entries on the parent project alone.
-publishing {
-    publications {
-        getByName<MavenPublication>("maven-publish") {
-            pom {
-                name = "another-framework"
-                description = "Common framework built on top of spring boot"
-                inceptionYear = "2023"
-                organization {
-                    name = "Another-Boot"
-                    url = "TBD"
-                }
-                developers {
-                    developer {
-                        name = "Rohan Aditeya"
-                        email = "rohan.aditeya@gmail.com"
-                        timezone = "Asia/Calcutta"
-                    }
-                }
-                distributionManagement {
-                    downloadUrl = "https://maven.pkg.github.com/RohanAditeya/another-framework"
-                }
-                scm {
-                    connection = "scm:git:${project.ext.get("scmConnectionUrl")}"
-                    developerConnection = "scm:git:${project.ext.get("scmConnectionUrl")}"
-                    tag = "HEAD"
-                    url = "${project.ext.get("scmConnectionUrl")}"
-                }
-            }
-        }
-    }
-}
-
-// Release config
-release {
-    git {
-        requireBranch.set("") // Testing with feature branch and will be removed afterward.
-    }
-}
-
-tasks.afterReleaseBuild {
-    dependsOn(tasks.publish)
 }
