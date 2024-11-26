@@ -24,7 +24,7 @@ class AnotherBootCoreEnvironmentPostProcessor implements EnvironmentPostProcesso
         try {
             YamlPropertySourceLoader propertySourceLoader = new YamlPropertySourceLoader();
             List<PropertySource<?>> coreProperties = propertySourceLoader.load(CORE_PROPERTY_SOURCE_NAME, new ClassPathResource(CORE_PROPERTY_RESOURCE));
-            environment.getPropertySources().addBefore(CONFIG_SOURCE, coreProperties.get(0));
+            environment.getPropertySources().addBefore(CONFIG_SOURCE, coreProperties.getFirst());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
