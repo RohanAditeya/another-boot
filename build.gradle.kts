@@ -12,6 +12,24 @@ plugins {
     alias(libs.plugins.gradle.release.plugin)
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/RohanAditeya/another-framework")
+            credentials {
+                username = project.findProperty("artifactory.user") as String? ?: "user"
+                password = project.findProperty("artifactory.password") as String? ?: "password"
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
+    }
+}
+
 subprojects {
     group = "com.framework.another.boot"
 
