@@ -140,8 +140,8 @@ tasks.register<LoadVersionFromPropertyFileTask>("loadVersionFromPropertyFile") {
     versionProperty.set("version")
 }
 
-configure<ReleaseExtension> {
-    with(git) {
-        requireBranch.set(null as String?)
+release {
+    git {
+        requireBranch.set("")
     }
 }
