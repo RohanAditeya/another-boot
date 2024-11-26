@@ -23,8 +23,8 @@ jobs:
           gradle-version: current
       - name: Test with Gradle
         if: github.ref_type == 'branch' && !(startsWith(github.ref_name, 'release') || startsWith(github.ref_name, 'main'))
-        run: git config user.email "release-bot@example.com" && git config user.name "release-bot" && gradle -Prelease.useAutomaticVersion=true -Partifactory.password=${{ secrets.GITHUB_TOKEN }} -Partifactory.user=${{ github.actor }} :unSnapshotVersion publish :updateVersion :commitNewVersion
+        run: gradle -Partifactory.password=${{ secrets.GITHUB_TOKEN }} -Partifactory.user=${{ github.actor }} build
       - name: Release with Gradle
         if: github.ref_type == 'branch' && (startsWith(github.ref_name, 'main'))
-        run: gradle -Prelease.useAutomaticVersion=true -Partifactory-password=${{ secrets.GITHUB_TOKEN }} -Partifactory-user=${{ github.actor }} release
+        run: git config user.email "release-bot@example.com" && git config user.name "release-bot" && gradle -Prelease.useAutomaticVersion=true -Partifactory.password=${{ secrets.GITHUB_TOKEN }} -Partifactory.user=${{ github.actor }} :unSnapshotVersion publish :updateVersion :commitNewVersion
     timeout-minutes: 10
