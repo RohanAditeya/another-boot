@@ -1,3 +1,4 @@
+import com.framework.another.boot.LoadVersionFromPropertyFileTask
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 import java.util.jar.Attributes
@@ -11,15 +12,11 @@ plugins {
     alias(libs.plugins.gradle.release.plugin)
 }
 
-ext {
-    set("scmConnectionUrl", "https://github.com/RohanAditeya/another-framework.git")
-}
-
 subprojects {
     group = "com.framework.another.boot"
-    version = "2.0.0-SNAPSHOT"
 
     apply(plugin = "maven-publish")
+    apply(plugin = "net.researchgate.release")
 
     repositories {
         mavenCentral()
@@ -102,4 +99,24 @@ subprojects {
             }
         }
     }
+
+    tasks.register<LoadVersionFromPropertyFileTask>("loadVersionFromPropertyFile") {
+        group = "build"
+        description = "Load project version from the provided file"
+        propertyFileProvider.set(file("${rootDir.path}/gradle.properties"))
+        versionProperty.set("version")
+    }
+
+    pluginManager.withPlugin("java") {
+        tasks.jar {
+            dependsOn("loadVersionFromPropertyFile")
+        }
+    }
+}
+
+tasks.register<LoadVersionFromPropertyFileTask>("loadVersionFromPropertyFile") {
+    group = "build"
+    description = "Load project version from the provided file"
+    propertyFileProvider.set(file("${rootDir.path}/gradle.properties"))
+    versionProperty.set("version")
 }
