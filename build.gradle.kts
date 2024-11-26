@@ -1,5 +1,6 @@
 import com.framework.another.boot.LoadVersionFromPropertyFileTask
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+import net.researchgate.release.ReleaseExtension
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 import java.util.jar.Attributes
 
@@ -137,4 +138,10 @@ tasks.register<LoadVersionFromPropertyFileTask>("loadVersionFromPropertyFile") {
     description = "Load project version from the provided file"
     propertyFileProvider.set(file("${rootDir.path}/gradle.properties"))
     versionProperty.set("version")
+}
+
+configure<ReleaseExtension> {
+    with(git) {
+        requireBranch.set(null as String?)
+    }
 }
