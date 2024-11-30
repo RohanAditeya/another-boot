@@ -23,11 +23,3 @@ publishing {
 javaPlatform {
     allowDependencies()
 }
-
-tasks.publish {
-    dependsOn("loadVersionFromPropertyFile")
-}
-
-tasks.assemble {
-    dependsOn("loadVersionFromPropertyFile")
-}

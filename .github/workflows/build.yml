@@ -26,5 +26,5 @@ jobs:
         run: gradle -Partifactory.password=${{ secrets.GITHUB_TOKEN }} -Partifactory.user=${{ github.actor }} build
       - name: Release with Gradle
         if: github.ref_type == 'branch' && (startsWith(github.ref_name, 'main'))
-        run: git config user.email "release-bot@example.com" && git config user.name "release-bot" && gradle -Prelease.useAutomaticVersion=true -Partifactory.password=${{ secrets.GITHUB_TOKEN }} -Partifactory.user=${{ github.actor }} :unSnapshotVersion publish :updateVersion :commitNewVersion
+        run: git config user.email "release-bot@example.com" && git config user.name "release-bot" && gradle -Prelease.useAutomaticVersion=true -Partifactory.password=${{ secrets.GITHUB_TOKEN }} -Partifactory.user=${{ github.actor }} -PisRelease=true publish :updateVersion :commitNewVersion
     timeout-minutes: 10

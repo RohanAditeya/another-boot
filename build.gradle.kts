@@ -1,7 +1,6 @@
-import com.framework.another.boot.LoadVersionFromPropertyFileTask
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
-import net.researchgate.release.ReleaseExtension
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import java.util.*
 import java.util.jar.Attributes
 
 val starterProjectName: List<String> = listOf("another-boot-bom", "another-boot-gradle-plugin")
@@ -33,6 +32,14 @@ allprojects {
 
 subprojects {
     group = "com.framework.another.boot"
+    val properties: Properties = Properties()
+    properties.load(file("${rootDir.path}/gradle.properties").reader())
+    val versionLoaded = properties.getProperty("version")
+    val isRelease = providers.gradleProperty("isRelease").getOrElse("false")
+    version = if (isRelease == "true")
+        versionLoaded.replace("-SNAPSHOT", "")
+    else
+        versionLoaded
 
     apply(plugin = "maven-publish")
     apply(plugin = "net.researchgate.release")
@@ -118,26 +125,6 @@ subprojects {
             }
         }
     }
-
-    tasks.register<LoadVersionFromPropertyFileTask>("loadVersionFromPropertyFile") {
-        group = "build"
-        description = "Load project version from the provided file"
-        propertyFileProvider.set(file("${rootDir.path}/gradle.properties"))
-        versionProperty.set("version")
-    }
-
-    pluginManager.withPlugin("java") {
-        tasks.jar {
-            dependsOn("loadVersionFromPropertyFile")
-        }
-    }
-}
-
-tasks.register<LoadVersionFromPropertyFileTask>("loadVersionFromPropertyFile") {
-    group = "build"
-    description = "Load project version from the provided file"
-    propertyFileProvider.set(file("${rootDir.path}/gradle.properties"))
-    versionProperty.set("version")
 }
 
 release {
