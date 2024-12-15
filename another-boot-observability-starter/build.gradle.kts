@@ -1,7 +1,7 @@
 dependencies {
     api(project(":another-boot-starter"))
     api("org.springframework.boot:spring-boot-starter-actuator")
-    api("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-web") //keep optional so that web is not enforced.
     api("io.micrometer:micrometer-tracing-bridge-otel")
     api("io.opentelemetry:opentelemetry-exporter-otlp")
     api("io.micrometer:micrometer-registry-otlp")
